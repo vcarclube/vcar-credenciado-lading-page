@@ -316,8 +316,8 @@
                             <h3>Dados Básicos da Oficina</h3>
 
                             <div class="form-group">
-                                <label for="nome-fantasia">Nome Fantasia da Oficina</label>
-                                <input type="text" id="nome-fantasia" name="nome-fantasia"
+                                <label for="nomeFantasia">Nome Fantasia da Oficina</label>
+                                <input type="text" id="nomeFantasia" name="nomeFantasia"
                                     placeholder="Ex: Auto Center Silva" required>
                             </div>
 
@@ -328,8 +328,8 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="telefone">Celular (WhatsApp)</label>
-                                    <input type="tel" id="telefone" name="telefone" placeholder="(00) 00000-0000" required>
+                                    <label for="celular">Celular (WhatsApp)</label>
+                                    <input type="tel" id="celular" name="celular" placeholder="(00) 00000-0000" required>
                                 </div>
                             </div>
 
@@ -427,8 +427,8 @@
 
                             <div class="form-row">
                                 <div class="form-group">
-                                    <label for="elevadores">Número de Elevadores</label>
-                                    <select id="elevadores" name="elevadores" required>
+                                    <label for="numeroElevadores">Número de Elevadores</label>
+                                    <select id="numeroElevadores" name="numeroElevadores" required>
                                         <option value="" disabled selected>Selecione</option>
                                         <option value="1">1 elevador</option>
                                         <option value="2">2 elevadores</option>
@@ -439,8 +439,8 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="tempo-mercado">Tempo no Mercado</label>
-                                    <select id="tempo-mercado" name="tempo-mercado" required>
+                                    <label for="tempoMercado">Tempo no Mercado</label>
+                                    <select id="tempoMercado" name="tempoMercado" required>
                                         <option value="" disabled selected>Selecione</option>
                                         <option value="menos-1">Menos de 1 ano</option>
                                         <option value="1-3">1 a 3 anos</option>
@@ -455,28 +455,28 @@
                                 <label>Quadro de Colaboradores (selecione todas as opções aplicáveis)</label>
                                 <div class="checkbox-container">
                                     <div class="checkbox-item">
-                                        <input type="checkbox" id="mecanico" name="colaboradores" value="mecanico">
+                                        <input type="checkbox" id="mecanico" name="quadroColaboradores" value="mecanico">
                                         <label for="mecanico">Mecânico</label>
                                     </div>
                                     <div class="checkbox-item">
-                                        <input type="checkbox" id="alinhador" name="colaboradores" value="alinhador">
+                                        <input type="checkbox" id="alinhador" name="quadroColaboradores" value="alinhador">
                                         <label for="alinhador">Alinhador</label>
                                     </div>
                                     <div class="checkbox-item">
-                                        <input type="checkbox" id="torneiro" name="colaboradores" value="torneiro">
+                                        <input type="checkbox" id="torneiro" name="quadroColaboradores" value="torneiro">
                                         <label for="torneiro">Torneiro</label>
                                     </div>
                                     <div class="checkbox-item">
-                                        <input type="checkbox" id="eletricista" name="colaboradores" value="eletricista">
+                                        <input type="checkbox" id="eletricista" name="quadroColaboradores" value="eletricista">
                                         <label for="eletricista">Eletricista</label>
                                     </div>
                                     <div class="checkbox-item">
-                                        <input type="checkbox" id="administrativo" name="colaboradores"
+                                        <input type="checkbox" id="administrativo" name="quadroColaboradores"
                                             value="administrativo">
                                         <label for="administrativo">Administrativo</label>
                                     </div>
                                     <div class="checkbox-item">
-                                        <input type="checkbox" id="caixa" name="colaboradores" value="caixa">
+                                        <input type="checkbox" id="caixa" name="quadroColaboradores" value="caixa">
                                         <label for="caixa">Caixa</label>
                                     </div>
                                 </div>
@@ -497,7 +497,7 @@
                                 <div id="servicos-adicionais-container">
                                     <div class="servico-adicional-item">
                                         <div class="input-with-button">
-                                            <input type="text" name="servicos-adicionais[]"
+                                            <input type="text" name="servicosPrestados[]"
                                                 placeholder="Digite um serviço">
                                             <button type="button" class="btn-icon btn-add-servico"><i
                                                     class="fas fa-plus"></i></button>
@@ -717,7 +717,7 @@
             newItem.className = 'servico-adicional-item';
             newItem.innerHTML = `
                     <div class="input-with-button">
-                        <input type="text" name="servicos-adicionais[]" placeholder="Digite um serviço adicional">
+                        <input type="text" name="servicosPrestados[]" placeholder="Digite um serviço adicional">
                         <button type="button" class="btn-icon btn-add-servico"><i class="fas fa-plus"></i></button>
                     </div>
                 `;
@@ -944,7 +944,7 @@
                 })
                 .catch(error => {
                     console.error('Erro ao enviar formulário:', error);
-                    alert('Ocorreu um erro ao enviar o formulário. Por favor, tente novamente.');
+                    //alert('Ocorreu um erro ao enviar o formulário. Por favor, tente novamente.');
 
                     // Restaurar botão
                     submitButton.innerHTML = originalButtonText;
@@ -977,7 +977,7 @@
             });
 
             // Máscara para telefone
-            const telefoneInput = document.getElementById('telefone');
+            const telefoneInput = document.getElementById('celular');
             telefoneInput.addEventListener('input', function (e) {
                 let value = e.target.value.replace(/\D/g, '');
                 if (value.length > 11) {
