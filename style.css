@@ -2528,10 +2528,6 @@ input:checked + .slider:before {
 @media (max-width: 576px) {
     /* Correções adicionais para telas muito pequenas */
 
-    .hero-content{
-        margin-top: 300px;
-    }
-
     .header-buttons .btn-outline {
         display: none;
     }
@@ -3400,5 +3396,62 @@ svg {
     
     .cadastro-form {
         padding: 20px;
+    }
+}
+
+
+/* Mobile Small (320px - 480px) */
+@media (max-width: 480px) {
+    .hero-content {
+        margin-top: 300px !important;
+    }
+}
+
+/* Mobile Large (481px - 600px) */
+@media (min-width: 481px) and (max-width: 600px) {
+    .hero-content {
+        margin-top: 120px !important;
+    }
+}
+
+/* Tablet Portrait (601px - 768px) */
+@media (min-width: 601px) and (max-width: 768px) {
+    .hero-content {
+        margin-top: 120px !important;
+    }
+}
+
+/* Tablet Landscape (769px - 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .hero-content {
+        margin-top: 140px !important;
+    }
+}
+
+/* Desktop Small (1025px - 1200px) */
+@media (min-width: 1025px) and (max-width: 1200px) {
+    .hero-content {
+        margin-top: 0px !important;
+    }
+}
+
+/* Desktop Medium (1201px - 1440px) */
+@media (min-width: 1201px) and (max-width: 1440px) {
+    .hero-content {
+        margin-top: 0px !important;
+    }
+}
+
+/* Desktop Large (1441px - 1920px) */
+@media (min-width: 1441px) and (max-width: 1920px) {
+    .hero-content {
+        margin-top: 0px !important;
+    }
+}
+
+/* Desktop Extra Large (1921px+) */
+@media (min-width: 1921px) {
+    .hero-content {
+        margin-top: 0px !important;
     }
 }
