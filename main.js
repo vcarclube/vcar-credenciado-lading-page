@@ -43,7 +43,7 @@ window.addEventListener('load', () => {
 });
 
 // Mobile Menu Toggle
-mobileMenu.addEventListener('click', () => {
+mobileMenu?.addEventListener('click', () => {
     mobileMenu.classList.toggle('active');
     navLinks.classList.toggle('active');
     
@@ -86,7 +86,7 @@ window.addEventListener('scroll', function() {
     }
 });
 // Back to top button
-backToTop.addEventListener('click', () => {
+backToTop?.addEventListener('click', () => {
     window.scrollTo({
         top: 0,
         behavior: 'smooth'

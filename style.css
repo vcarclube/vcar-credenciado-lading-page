@@ -249,6 +249,15 @@ img {
     padding: 20px 0;
 }
 
+#header2 {
+    position: relative;
+    width: 100%;
+    background-color: transparent;
+    z-index: 1000;
+    transition: var(--transition);
+    padding: 20px 0;
+}
+
 #header.scrolled {
     background-color: var(--white);
     box-shadow: var(--shadow);
@@ -276,6 +285,11 @@ img {
 }
 
 .logo img {
+    height: 40px;
+    transition: var(--transition);
+}
+
+.logo2 img{
     height: 40px;
     transition: var(--transition);
 }

@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VCar Clube | Seja uma Oficina Credenciada</title>
+    <meta name="description"
+        content="Aumente seu faturamento e receba clientes pré-qualificados como oficina credenciada do VCar Clube. Vagas limitadas por região.">
+    <meta property="og:image" content="logo-black.png" />
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="icon" type="image/png" href="logo-black.png">
+    <!-- Leaflet CSS para o mapa -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y4485LZ6H0"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-Y4485LZ6H0');
+    </script>
+    <style>
+        label {
+            margin-bottom: 0px !important;
+        }
+
+        .section-header {
+            margin-bottom: 30px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background-color: #e0e0e0;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+
+        .progress {
+            height: 100%;
+            background-color: #00aa55;
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        .step-indicators {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .step-h {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            width: 20%;
+            margin-bottom: 20px !important;
+        }
+
+        .step-number {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: #e0e0e0;
+            color: #666;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            margin-bottom: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .step-text {
+            font-size: 12px;
+            color: #666;
+            text-align: center;
+        }
+
+        .step-h.active .step-number {
+            background-color: #00aa55;
+            color: white;
+        }
+
+        .step-h.completed .step-number {
+            background-color: #00aa55;
+            color: white;
+        }
+
+        .form-step {
+            transition: opacity 0.3s ease;
+        }
+
+        .form-step h3 {
+            margin-bottom: 20px;
+            color: #333;
+            font-size: 1.5rem;
+        }
+
+        .form-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        .btn-prev,
+        .btn-next {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .btn-prev {
+            background-color: #e0e0e0;
+            color: #333;
+        }
+
+        .btn-next {
+            background-color: #00aa55;
+            color: white;
+        }
+
+        .btn-prev:hover {
+            background-color: #d0d0d0;
+        }
+
+        .btn-next:hover {
+            background-color: #00aa55;
+        }
+
+        .input-with-button {
+            display: flex;
+            align-items: center;
+        }
+
+        .input-with-button input {
+            flex: 1;
+            margin-right: 10px;
+        }
+
+        .btn-icon {
+            width: 40px;
+            height: 40px;
+            border: none;
+            border-radius: 4px;
+            background-color: #00aa55;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .btn-icon:hover {
+            background-color: #00aa55;
+        }
+
+        .servico-adicional-item {
+            margin-bottom: 10px;
+        }
+
+        .confirmation-message {
+            background-color: #f5f5f5;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+
+        /* Estilos para o mapa */
+        #map-container {
+            border-radius: 4px;
+            overflow: hidden;
+            border: 1px solid #ddd;
+        }
+
+        /* Estilo para campos com erro */
+        .error {
+            border: 2px solid #ff3333 !important;
+            background-color: rgba(255, 51, 51, 0.05);
+        }
+
+        /* Card de sucesso */
+        .success-card {
+            display: none;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .success-card .icon {
+            font-size: 60px;
+            color: #00aa55;
+            margin-bottom: 20px;
+        }
+
+        .success-card h3 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .success-card p {
+            color: #666;
+            font-size: 16px;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .success-card .btn-home {
+            background-color: #00aa55;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .success-card .btn-home:hover {
+            background-color: #008844;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="loader">
+            <svg viewBox="0 0 80 80">
+                <circle id="loader-circle" cx="40" cy="40" r="32"></circle>
+            </svg>
+            <div class="car-icon">
+                <img src="logo-black.png" />
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header id="header2" style="background-color: #fff;">
+        <div class="container" style="display: flex; align-items: center; justify-content: space-between;">
+            <div class="logo2">
+                <img src="logo-black.png" alt="VCar Clube Logo">
+            </div>
+            <nav>
+                <ul class="nav-links"></ul>
+                <div class="header-buttons">
+                    <a href="index.html" class="btn-primary"
+                        style="display: flex; align-items: center; justify-content: center;">
+                        <div><i class="fa-solid fa-arrow-left"></i></div>&nbsp;&nbsp;&nbsp;
+                        <div><span>voltar</span></div>
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Cadastro Section -->
+    <section id="cadastro" class="cadastro" style="padding-top: 20px;">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2>Cadastre sua <span class="highlight">Oficina</span></h2>
+                <p class="section-subtitle">Preencha o formulário abaixo para iniciar o processo de credenciamento</p>
+            </div>
+
+            <div id="cadastro-container">
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress" id="form-progress"></div>
+                    </div>
+                    <div class="step-indicators">
+                        <div class="step-h active" data-step="1">
+                            <div class="step-number">1</div>
+                            <div class="step-text">Dados Básicos</div>
+                        </div>
+                        <div class="step-h" data-step="2">
+                            <div class="step-number">2</div>
+                            <div class="step-text">Endereço</div>
+                        </div>
+                        <div class="step-h" data-step="3">
+                            <div class="step-number">3</div>
+                            <div class="step-text">Informações Técnicas</div>
+                        </div>
+                        <div class="step-h" data-step="4">
+                            <div class="step-number">4</div>
+                            <div class="step-text">Serviços</div>
+                        </div>
+                        <div class="step-h" data-step="5">
+                            <div class="step-number">5</div>
+                            <div class="step-text">Confirmação</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cadastro-container" data-aos="fade-up" data-aos-delay="200">
+                    <!-- Progress Bar -->
+
+                    <form id="cadastroForm" class="cadastro-form">
+                        <!-- Step 1: Dados Básicos -->
+                        <div class="form-step" id="step-1">
+                            <h3>Dados Básicos da Oficina</h3>
+
+                            <div class="form-group">
+                                <label for="nome-fantasia">Nome Fantasia da Oficina</label>
+                                <input type="text" id="nome-fantasia" name="nome-fantasia"
+                                    placeholder="Ex: Auto Center Silva" required>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="cnpj">CNPJ</label>
+                                    <input type="text" id="cnpj" name="cnpj" placeholder="00.000.000/0000-00" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="telefone">Celular (WhatsApp)</label>
+                                    <input type="tel" id="telefone" name="telefone" placeholder="(00) 00000-0000" required>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="responsavel">Nome do Responsável</label>
+                                    <input type="text" id="responsavel" name="responsavel" placeholder="Nome completo"
+                                        required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="email">E-mail</label>
+                                    <input type="email" id="email" name="email" placeholder="seu@email.com" required>
+                                </div>
+                            </div>
+
+                            <div class="form-navigation" style="float: right !important;">
+                                <button type="button" class="btn-next">Próximo <i class="fas fa-arrow-right"></i></button>
+                            </div>
+                        </div>
+
+                        <!-- Step 2: Endereço -->
+                        <div class="form-step" id="step-2" style="display: none;">
+                            <h3>Endereço da Oficina</h3>
+
+                            <div class="form-group">
+                                <label for="cep">CEP</label>
+                                <div class="input-with-button">
+                                    <input type="text" id="cep" name="cep" placeholder="00000-000" required>
+                                    <button type="button" id="buscar-cep" class="btn-icon"><i
+                                            class="fas fa-search"></i></button>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="logradouro">Logradouro</label>
+                                    <input type="text" id="logradouro" name="logradouro" placeholder="Rua/Avenida" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="numero">Número</label>
+                                    <input type="text" id="numero" name="numero" placeholder="Nº" required>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="complemento">Complemento</label>
+                                    <input type="text" id="complemento" name="complemento" placeholder="Sala, Loja, etc.">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="bairro">Bairro</label>
+                                    <input type="text" id="bairro" name="bairro" placeholder="Bairro" required>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="cidade">Cidade</label>
+                                    <input type="text" id="cidade" name="cidade" placeholder="Cidade" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="estado">Estado</label>
+                                    <input type="text" id="estado" name="estado" placeholder="UF" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Localização no Mapa (Ajuste o mapa para marcar a localização exata)</label>
+                                <div id="map-container" style="height: 300px; margin-bottom: 15px;"></div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="latitude">Latitude</label>
+                                        <input type="text" id="latitude" name="latitude" readonly>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="longitude">Longitude</label>
+                                        <input type="text" id="longitude" name="longitude" readonly>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-navigation">
+                                <button type="button" class="btn-prev"><i class="fas fa-arrow-left"></i> Anterior</button>
+                                <button type="button" class="btn-next">Próximo <i class="fas fa-arrow-right"></i></button>
+                            </div>
+                        </div>
+
+                        <!-- Step 3: Informações Técnicas -->
+                        <div class="form-step" id="step-3" style="display: none;">
+                            <h3>Informações Técnicas</h3>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="elevadores">Número de Elevadores</label>
+                                    <select id="elevadores" name="elevadores" required>
+                                        <option value="" disabled selected>Selecione</option>
+                                        <option value="1">1 elevador</option>
+                                        <option value="2">2 elevadores</option>
+                                        <option value="3">3 elevadores</option>
+                                        <option value="4">4 elevadores</option>
+                                        <option value="5+">5 ou mais</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="tempo-mercado">Tempo no Mercado</label>
+                                    <select id="tempo-mercado" name="tempo-mercado" required>
+                                        <option value="" disabled selected>Selecione</option>
+                                        <option value="menos-1">Menos de 1 ano</option>
+                                        <option value="1-3">1 a 3 anos</option>
+                                        <option value="3-5">3 a 5 anos</option>
+                                        <option value="5-10">5 a 10 anos</option>
+                                        <option value="mais-10">Mais de 10 anos</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Quadro de Colaboradores (selecione todas as opções aplicáveis)</label>
+                                <div class="checkbox-container">
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="mecanico" name="colaboradores" value="mecanico">
+                                        <label for="mecanico">Mecânico</label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="alinhador" name="colaboradores" value="alinhador">
+                                        <label for="alinhador">Alinhador</label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="torneiro" name="colaboradores" value="torneiro">
+                                        <label for="torneiro">Torneiro</label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="eletricista" name="colaboradores" value="eletricista">
+                                        <label for="eletricista">Eletricista</label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="administrativo" name="colaboradores"
+                                            value="administrativo">
+                                        <label for="administrativo">Administrativo</label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="caixa" name="colaboradores" value="caixa">
+                                        <label for="caixa">Caixa</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-navigation">
+                                <button type="button" class="btn-prev"><i class="fas fa-arrow-left"></i> Anterior</button>
+                                <button type="button" class="btn-next">Próximo <i class="fas fa-arrow-right"></i></button>
+                            </div>
+                        </div>
+
+                        <!-- Step 4: Serviços -->
+                        <div class="form-step" id="step-4" style="display: none;">
+                            <h3>Serviços Prestados</h3>
+
+                            <div class="form-group">
+                                <label>Lista de Serviços:</label>
+                                <div id="servicos-adicionais-container">
+                                    <div class="servico-adicional-item">
+                                        <div class="input-with-button">
+                                            <input type="text" name="servicos-adicionais[]"
+                                                placeholder="Digite um serviço adicional">
+                                            <button type="button" class="btn-icon btn-add-servico"><i
+                                                    class="fas fa-plus"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-navigation">
+                                <button type="button" class="btn-prev"><i class="fas fa-arrow-left"></i> Anterior</button>
+                                <button type="button" class="btn-next">Próximo <i class="fas fa-arrow-right"></i></button>
+                            </div>
+                        </div>
+
+                        <!-- Step 5: Confirmação -->
+                        <div class="form-step" id="step-5" style="display: none;">
+                            <h3>Confirmação</h3>
+
+                            <div class="confirmation-message">
+                                <p>Por favor, revise todas as informações antes de enviar seu cadastro.</p>
+                            </div>
+
+                            <div class="form-group checkbox-group">
+                                <input type="checkbox" id="termos" name="termos" required>
+                                <label for="termos">Concordo com os <a href="#termos-modal">Termos e Condições</a> e
+                                    autorizo o contato da equipe VCar Clube</label>
+                            </div>
+
+                            <div class="form-navigation">
+                                <button type="button" class="btn-prev">
+                                    <i class="fa-solid fa-chevron-left" style="font-size: 18pt;"></i>
+                                </button>&nbsp;&nbsp;
+                                <button type="submit" class="btn-primary btn-lg btn-submit">
+                                    <i class="fas fa-handshake"></i> Quero ser uma Oficina Credenciada
+                                </button>
+                            </div>
+
+                            <div class="form-note">
+                                <i class="fas fa-shield-alt"></i>
+                                <p>Seus dados estão protegidos e não serão compartilhados com terceiros.</p>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Card de Sucesso -->
+            <div id="success-card" class="success-card">
+                <div class="icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h3>Cadastro Enviado com Sucesso!</h3>
+                <p>Seu cadastro foi enviado para o grupo VCar Clube. Te daremos um retorno em breve.</p>
+                <a href="index.html" class="btn-home">
+                    <i class="fas fa-home"></i> Voltar para a Página Inicial
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="main.js"></script>
+</body>
+
+</html>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Inicialização do AOS
+        AOS.init();
+
+        // Variáveis para controle dos steps
+        const steps = document.querySelectorAll('.form-step');
+        const stepIndicators = document.querySelectorAll('.step-h');
+        const progressBar = document.getElementById('form-progress');
+        const form = document.getElementById('cadastroForm');
+        let currentStep = 0;
+
+        // Inicializar progress bar
+        updateProgressBar();
+
+        // Event listeners para navegação
+        document.querySelectorAll('.btn-next').forEach(button => {
+            button.addEventListener('click', nextStep);
+        });
+
+        document.querySelectorAll('.btn-prev').forEach(button => {
+            button.addEventListener('click', prevStep);
+        });
+
+        // Evento para adicionar serviço
+        document.addEventListener('click', function (e) {
+            if (e.target.classList.contains('btn-add-servico') ||
+                e.target.parentElement.classList.contains('btn-add-servico')) {
+                addServicoField();
+            }
+        });
+
+        // Evento para busca de CEP
+        document.getElementById('buscar-cep').addEventListener('click', buscarCEP);
+        document.getElementById('cep').addEventListener('blur', buscarCEP);
+
+        // Inicializar mapa quando o step 2 estiver visível
+        document.querySelectorAll('.btn-next')[0].addEventListener('click', initMap);
+
+        // Submissão do formulário
+        form.addEventListener('submit', submitForm);
+
+        // Validação em tempo real dos campos
+        document.querySelectorAll('input[required], select[required]').forEach(field => {
+            field.addEventListener('blur', function() {
+                validateField(this);
+            });
+            
+            field.addEventListener('input', function() {
+                if (this.classList.contains('error')) {
+                    validateField(this);
+                }
+            });
+        });
+
+        // Função para validar um campo individual
+        function validateField(field) {
+            if (!field.value.trim()) {
+                field.classList.add('error');
+                return false;
+            } else {
+                field.classList.remove('error');
+                return true;
+            }
+        }
+
+        // Funções de navegação
+        function nextStep() {
+            // Validar campos do step atual antes de avançar
+            if (!validateStep(currentStep)) {
+                return;
+            }
+
+            if (currentStep < steps.length - 1) {
+                steps[currentStep].style.display = 'none';
+                currentStep++;
+                steps[currentStep].style.display = 'block';
+
+                // Atualizar indicadores
+                updateStepIndicators();
+                updateProgressBar();
+
+                // Scroll para o topo do formulário
+                document.querySelector('.cadastro-form').scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function prevStep() {
+            if (currentStep > 0) {
+                steps[currentStep].style.display = 'none';
+                currentStep--;
+                steps[currentStep].style.display = 'block';
+
+                // Atualizar indicadores
+                updateStepIndicators();
+                updateProgressBar();
+
+                // Scroll para o topo do formulário
+                document.querySelector('.cadastro-form').scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function updateStepIndicators() {
+            stepIndicators.forEach((indicator, index) => {
+                if (index < currentStep) {
+                    indicator.classList.remove('active');
+                    indicator.classList.add('completed');
+                } else if (index === currentStep) {
+                    indicator.classList.add('active');
+                    indicator.classList.remove('completed');
+                } else {
+                    indicator.classList.remove('active', 'completed');
+                }
+            });
+        }
+
+        function updateProgressBar() {
+            const progress = ((currentStep) / (steps.length - 1)) * 100;
+            progressBar.style.width = `${progress}%`;
+        }
+
+        // Validação de cada step
+        function validateStep(step) {
+            let isValid = true;
+            const requiredFields = steps[step].querySelectorAll('[required]');
+
+            requiredFields.forEach(field => {
+                if (!validateField(field)) {
+                    isValid = false;
+                }
+            });
+
+            if (!isValid) {
+                // Rolar até o primeiro campo com erro
+                const firstErrorField = steps[step].querySelector('.error');
+                if (firstErrorField) {
+                    firstErrorField.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    firstErrorField.focus();
+                }
+            }
+
+            return isValid;
+        }
+
+        // Função para adicionar campo de serviço
+        function addServicoField() {
+            const container = document.getElementById('servicos-adicionais-container');
+            const newItem = document.createElement('div');
+            newItem.className = 'servico-adicional-item';
+            newItem.innerHTML = `
+                    <div class="input-with-button">
+                        <input type="text" name="servicos-adicionais[]" placeholder="Digite um serviço adicional">
+                        <button type="button" class="btn-icon btn-add-servico"><i class="fas fa-plus"></i></button>
+                    </div>
+                `;
+
+            // Substituir o botão + por - no item anterior
+            const items = container.querySelectorAll('.servico-adicional-item');
+            if (items.length > 0) {
+                const lastItem = items[items.length - 1];
+                const lastButton = lastItem.querySelector('.btn-add-servico');
+                lastButton.classList.remove('btn-add-servico');
+                lastButton.classList.add('btn-remove-servico');
+                lastButton.innerHTML = '<i class="fas fa-minus"></i>';
+
+                // Adicionar evento para remover
+                lastButton.addEventListener('click', function () {
+                    container.removeChild(lastItem);
+                });
+            }
+
+            container.appendChild(newItem);
+        }
+
+        // Função para buscar CEP
+        function buscarCEP() {
+            const cep = document.getElementById('cep').value.replace(/\D/g, '');
+
+            if (cep.length !== 8) {
+                return;
+            }
+
+            // Mostrar loading
+            document.getElementById('buscar-cep').innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+
+            fetch(`https://viacep.com.br/ws/${cep}/json/`)
+                .then(response => response.json())
+                .then(data => {
+                    if (!data.erro) {
+                        document.getElementById('logradouro').value = data.logradouro;
+                        document.getElementById('bairro').value = data.bairro;
+                        document.getElementById('cidade').value = data.localidade;
+                                                document.getElementById('logradouro').value = data.logradouro;
+                        document.getElementById('bairro').value = data.bairro;
+                        document.getElementById('cidade').value = data.localidade;
+                        document.getElementById('estado').value = data.uf;
+
+                        // Remover classe de erro se os campos foram preenchidos
+                        document.getElementById('logradouro').classList.remove('error');
+                        document.getElementById('bairro').classList.remove('error');
+                        document.getElementById('cidade').classList.remove('error');
+                        document.getElementById('estado').classList.remove('error');
+
+                        // Focar no campo número
+                        document.getElementById('numero').focus();
+
+                        // Atualizar mapa com a localização aproximada
+                        if (map) {
+                            const address = `${data.logradouro}, ${data.localidade}, ${data.uf}`;
+                            updateMapByAddress(address);
+                        }
+                    } else {
+                        alert('CEP não encontrado. Por favor, verifique o número informado.');
+                        document.getElementById('cep').classList.add('error');
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro ao buscar CEP:', error);
+                    alert('Erro ao buscar CEP. Por favor, tente novamente.');
+                })
+                .finally(() => {
+                    // Restaurar ícone de busca
+                    document.getElementById('buscar-cep').innerHTML = '<i class="fas fa-search"></i>';
+                });
+        }
+
+        // Variáveis para o mapa
+        let map, marker;
+
+        // Inicializar mapa
+        function initMap() {
+            if (map) return; // Evitar inicialização múltipla
+
+            // Inicializar mapa com localização padrão (Brasil)
+            map = L.map('map-container').setView([-15.7801, -47.9292], 5);
+
+            // Adicionar camada de mapa
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+
+            // Adicionar marcador inicial
+            marker = L.marker([-15.7801, -47.9292], {
+                draggable: true
+            }).addTo(map);
+
+            // Atualizar coordenadas quando o marcador for movido
+            marker.on('dragend', function (event) {
+                const position = marker.getLatLng();
+                document.getElementById('latitude').value = position.lat.toFixed(6);
+                document.getElementById('longitude').value = position.lng.toFixed(6);
+            });
+
+            // Atualizar coordenadas quando clicar no mapa
+            map.on('click', function (event) {
+                marker.setLatLng(event.latlng);
+                document.getElementById('latitude').value = event.latlng.lat.toFixed(6);
+                document.getElementById('longitude').value = event.latlng.lng.toFixed(6);
+            });
+
+            // Forçar atualização do mapa após renderização
+            setTimeout(() => {
+                map.invalidateSize();
+            }, 100);
+
+            // Se já temos endereço, tentar localizar no mapa
+            const cep = document.getElementById('cep').value;
+            if (cep && cep.length === 9) {
+                buscarCEP();
+            }
+        }
+
+        // Atualizar mapa com base no endereço
+        function updateMapByAddress(address) {
+            // Usar Nominatim OpenStreetMap para geocodificação
+            fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data && data.length > 0) {
+                        const lat = parseFloat(data[0].lat);
+                        const lon = parseFloat(data[0].lon);
+
+                        // Atualizar mapa e marcador
+                        map.setView([lat, lon], 16);
+                        marker.setLatLng([lat, lon]);
+
+                        // Atualizar campos de coordenadas
+                        document.getElementById('latitude').value = lat.toFixed(6);
+                        document.getElementById('longitude').value = lon.toFixed(6);
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro ao geocodificar endereço:', error);
+                });
+        }
+
+        // Função para mostrar o card de sucesso
+        function showSuccessCard() {
+            // Esconder o formulário
+            document.getElementById('cadastro-container').style.display = 'none';
+            
+            // Mostrar o card de sucesso
+            document.getElementById('success-card').style.display = 'block';
+            
+            // Scroll para o topo para garantir que o card seja visível
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Função para enviar o formulário
+        function submitForm(e) {
+            e.preventDefault();
+
+            // Validar o último step
+            if (!validateStep(currentStep)) {
+                return;
+            }
+
+            // Verificar se os termos foram aceitos
+            if (!document.getElementById('termos').checked) {
+                alert('Você precisa aceitar os termos e condições para continuar.');
+                document.getElementById('termos').classList.add('error');
+                return;
+            }
+
+            // Coletar todos os dados do formulário
+            const formData = new FormData(form);
+
+            // Converter para objeto
+            const formObject = {};
+            formData.forEach((value, key) => {
+                // Tratar campos de array (como serviços adicionais)
+                if (key.endsWith('[]')) {
+                    const cleanKey = key.slice(0, -2);
+                    if (!formObject[cleanKey]) {
+                        formObject[cleanKey] = [];
+                    }
+                    formObject[cleanKey].push(value);
+                } else if (formObject[key]) {
+                    // Se a chave já existe, converter para array
+                    if (!Array.isArray(formObject[key])) {
+                        formObject[key] = [formObject[key]];
+                    }
+                    formObject[key].push(value);
+                } else {
+                    formObject[key] = value;
+                }
+            });
+
+            // Adicionar coordenadas
+            formObject.latitude = document.getElementById('latitude').value;
+            formObject.longitude = document.getElementById('longitude').value;
+
+            // Mostrar loading no botão de submit
+            const submitButton = document.querySelector('.btn-submit');
+            const originalButtonText = submitButton.innerHTML;
+            submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+            submitButton.disabled = true;
+
+            // Enviar dados para o servidor
+            fetch('http://localhost:3000/oficinas', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formObject)
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Erro ao enviar formulário');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // Mostrar card de sucesso em vez de redirecionar
+                    showSuccessCard();
+                })
+                .catch(error => {
+                    console.error('Erro ao enviar formulário:', error);
+                    alert('Ocorreu um erro ao enviar o formulário. Por favor, tente novamente.');
+
+                    // Restaurar botão
+                    submitButton.innerHTML = originalButtonText;
+                    submitButton.disabled = false;
+                });
+        }
+
+        // Máscara para campos
+        function setupInputMasks() {
+            // Máscara para CNPJ
+            const cnpjInput = document.getElementById('cnpj');
+            cnpjInput.addEventListener('input', function (e) {
+                let value = e.target.value.replace(/\D/g, '');
+                if (value.length > 14) {
+                    value = value.slice(0, 14);
+                }
+
+                // Formatar CNPJ: 00.000.000/0000-00
+                if (value.length > 12) {
+                    value = value.replace(/^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})$/, '$1.$2.$3/$4-$5');
+                } else if (value.length > 8) {
+                    value = value.replace(/^(\d{2})(\d{3})(\d{3})(\d+)$/, '$1.$2.$3/$4');
+                } else if (value.length > 5) {
+                    value = value.replace(/^(\d{2})(\d{3})(\d+)$/, '$1.$2.$3');
+                } else if (value.length > 2) {
+                    value = value.replace(/^(\d{2})(\d+)$/, '$1.$2');
+                }
+
+                e.target.value = value;
+            });
+
+            // Máscara para telefone
+            const telefoneInput = document.getElementById('telefone');
+            telefoneInput.addEventListener('input', function (e) {
+                let value = e.target.value.replace(/\D/g, '');
+                if (value.length > 11) {
+                    value = value.slice(0, 11);
+                }
+
+                // Formatar telefone: (00) 00000-0000
+                if (value.length > 10) {
+                    value = value.replace(/^(\d{2})(\d{5})(\d{4})$/, '($1) $2-$3');
+                } else if (value.length > 6) {
+                    value = value.replace(/^(\d{2})(\d{4})(\d+)$/, '($1) $2-$3');
+                } else if (value.length > 2) {
+                    value = value.replace(/^(\d{2})(\d+)$/, '($1) $2');
+                }
+
+                e.target.value = value;
+            });
+
+            // Máscara para CEP
+            const cepInput = document.getElementById('cep');
+            cepInput.addEventListener('input', function (e) {
+                let value = e.target.value.replace(/\D/g, '');
+                if (value.length > 8) {
+                    value = value.slice(0, 8);
+                }
+
+                // Formatar CEP: 00000-000
+                if (value.length > 5) {
+                    value = value.replace(/^(\d{5})(\d{3})$/, '$1-$2');
+                }
+
+                e.target.value = value;
+            });
+        }
+
+        // Configurar máscaras de input
+        setupInputMasks();
+
+        // Remover preloader quando a página estiver carregada
+        window.addEventListener('load', function () {
+            const preloader = document.querySelector('.preloader');
+            setTimeout(() => {
+                preloader.style.opacity = '0';
+                setTimeout(() => {
+                    preloader.style.display = 'none';
+                }, 500);
+            }, 1000);
+        });
+    });
+</script>
