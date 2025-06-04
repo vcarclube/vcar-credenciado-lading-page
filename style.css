@@ -3438,7 +3438,7 @@ svg {
 /* Desktop Medium (1201px - 1440px) */
 @media (min-width: 1201px) and (max-width: 1440px) {
     .hero-content {
-        margin-top: 0px !important;
+        margin-top: 140px !important;
     }
 }
 
