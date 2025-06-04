@@ -1,0 +1,1480 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VCar Clube | Documentação de Oficina Credenciada</title>
+    <meta name="description"
+        content="Envie a documentação necessária para finalizar o credenciamento da sua oficina no VCar Clube.">
+    <meta property="og:image" content="logo-black.png" />
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="icon" type="image/png" href="logo-black.png">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y4485LZ6H0"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-Y4485LZ6H0');
+    </script>
+    <style>
+        label {
+            margin-bottom: 0px !important;
+        }
+
+        .section-header {
+            margin-bottom: 30px;
+        }
+
+        .document-section {
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .document-section h3 {
+            color: #333;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .document-section h3 i {
+            margin-right: 10px;
+            color: #00aa55;
+        }
+
+        .document-section p {
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .upload-area {
+            border: 2px dashed #ccc;
+            border-radius: 6px;
+            padding: 25px;
+            text-align: center;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .upload-area:hover {
+            border-color: #00aa55;
+            background-color: rgba(0, 170, 85, 0.05);
+        }
+
+        .upload-area.active {
+            border-color: #00aa55;
+            background-color: rgba(0, 170, 85, 0.1);
+        }
+
+        .upload-area i {
+            font-size: 30px;
+            color: #00aa55;
+            margin-bottom: 10px;
+        }
+
+        .upload-area p {
+            margin-bottom: 0;
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        .preview-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .preview-item {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .preview-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .preview-item .remove-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background-color: rgba(255, 0, 0, 0.7);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .preview-pdf {
+            display: flex;
+            align-items: center;
+            background-color: #f0f0f0;
+            padding: 10px;
+            border-radius: 4px;
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        .preview-pdf i {
+            font-size: 24px;
+            color: #e74c3c;
+            margin-right: 10px;
+        }
+
+        .preview-pdf .file-name {
+            flex-grow: 1;
+            font-size: 14px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .preview-pdf .remove-btn {
+            background-color: transparent;
+            color: #666;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+
+        .status-pending {
+            background-color: #f0f0f0;
+            color: #666;
+        }
+
+        .status-approved {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .status-rejected {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .feedback-container {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 4px;
+            background-color: #f8f9fa;
+            border-left: 3px solid #00aa55;
+        }
+
+        .feedback-container.rejected {
+            border-left-color: #dc3545;
+        }
+
+        .feedback-container h4 {
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .feedback-container p {
+            font-size: 13px;
+            margin-bottom: 0;
+        }
+
+        .add-representative {
+            background-color: transparent;
+            color: #00aa55;
+            border: 1px solid #00aa55;
+            border-radius: 4px;
+            padding: 8px 15px;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .add-representative i {
+            margin-right: 5px;
+        }
+
+        .add-representative:hover {
+            background-color: #00aa55;
+            color: white;
+        }
+
+        .representative-item {
+            background-color: #f9f9f9;
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border: 1px solid #eee;
+        }
+
+        .representative-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .representative-header h4 {
+            margin: 0;
+            font-size: 16px;
+        }
+
+        .remove-representative {
+            background-color: transparent;
+            color: #dc3545;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .submit-container {
+            margin-top: 30px;
+            margin-bottom: 30px;
+            text-align: center;
+            width: 100%;
+        }
+
+        .btn-submit-docs {
+            background-color: #00aa55;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 12px 25px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .btn-submit-docs i {
+            margin-right: 8px;
+        }
+
+        .btn-submit-docs:hover {
+            background-color: #008844;
+            transform: translateY(-2px);
+        }
+
+        .btn-submit-docs:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .all-approved-message {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .all-approved-message i {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .all-approved-message h3 {
+            margin-bottom: 10px;
+            color: #155724;
+        }
+
+        .all-approved-message p {
+            margin-bottom: 0;
+        }
+
+        .some-rejected-message {
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .some-rejected-message i {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .some-rejected-message h3 {
+            margin-bottom: 10px;
+            color: #721c24;
+        }
+
+        .some-rejected-message p {
+            margin-bottom: 0;
+        }
+
+        /* Estilos para barra de progresso */
+        .progress-container {
+            margin: 20px 0;
+            background-color: #f0f0f0;
+            border-radius: 4px;
+            padding: 5px;
+            display: none;
+        }
+
+        .progress-bar {
+            width: 0%;
+            height: 20px;
+            background-color: #00aa55;
+            border-radius: 3px;
+            transition: width 0.3s ease;
+            text-align: center;
+            color: white;
+            font-size: 12px;
+            line-height: 20px;
+        }
+
+        .progress-text {
+            text-align: center;
+            margin-top: 5px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .document-section {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="loader">
+            <svg viewBox="0 0 80 80">
+                <circle id="loader-circle" cx="40" cy="40" r="32"></circle>
+            </svg>
+            <div class="car-icon">
+                <img src="logo-black.png" />
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header id="header2" style="background-color: #fff;">
+        <div class="container" style="display: flex; align-items: center; justify-content: space-between;">
+            <div class="logo2">
+                <img src="logo-black.png" alt="VCar Clube Logo">
+            </div>
+            <nav>
+                <ul class="nav-links"></ul>
+                <div class="header-buttons">
+                    <a href="index.html" class="btn-primary"
+                        style="display: flex; align-items: center; justify-content: center;">
+                        <div><i class="fa-solid fa-arrow-left"></i></div>&nbsp;&nbsp;&nbsp;
+                        <div><span>voltar</span></div>
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Documentação Section -->
+    <section id="documentacao" class="documentacao" style="padding-top: 20px;">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2>Documentação da <span class="highlight">Oficina</span></h2>
+                <p class="section-subtitle">Envie os documentos necessários para finalizar o credenciamento</p>
+            </div>
+
+            <div id="status-message" data-aos="fade-up" style="display: none;"></div>
+
+            <div id="documentacao-container" data-aos="fade-up" data-aos-delay="200">
+                <form id="documentacaoForm" class="documentacao-form">
+                    <!-- Logotipo -->
+                    <div class="document-section" data-aos="fade-up">
+                        <h3>
+                            <i class="fas fa-image"></i> Logotipo da Oficina
+                            <span id="logotipo-status" class="status-badge status-pending">Pendente</span>
+                        </h3>
+                        <p>Envie o logotipo da sua oficina em alta resolução (formatos PNG, JPG ou JPEG)</p>
+
+                        <div id="logotipo-upload-area" class="upload-area" data-type="logotipo">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <p>Clique ou arraste o arquivo aqui</p>
+                            <input type="file" id="logotipo-input" class="file-input" data-type="logotipo" accept="image/*">
+                        </div>
+
+                        <div id="logotipo-preview" class="preview-container"></div>
+
+                        <div id="logotipo-feedback" class="feedback-container" style="display: none;">
+                            <h4>Feedback da Análise:</h4>
+                            <p id="logotipo-feedback-text"></p>
+                        </div>
+                    </div>
+
+                    <!-- Fotos do Estabelecimento -->
+                    <div class="document-section" data-aos="fade-up" data-aos-delay="100">
+                        <h3>
+                            <i class="fas fa-store"></i> Fotos do Estabelecimento
+                            <span id="fotos-status" class="status-badge status-pending">Pendente</span>
+                        </h3>
+                        <p>Envie fotos da fachada e do interior da sua oficina (mínimo 3 fotos)</p>
+
+                        <div id="fotos-upload-area" class="upload-area" data-type="fotos">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <p>Clique ou arraste os arquivos aqui</p>
+                            <input type="file" id="fotos-input" class="file-input" data-type="fotos" accept="image/*" multiple>
+                        </div>
+
+                        <div id="fotos-preview" class="preview-container"></div>
+
+                        <div id="fotos-feedback" class="feedback-container" style="display: none;">
+                            <h4>Feedback da Análise:</h4>
+                            <p id="fotos-feedback-text"></p>
+                        </div>
+                    </div>
+
+                    <!-- Comprovante de Endereço -->
+                    <div class="document-section" data-aos="fade-up" data-aos-delay="200">
+                        <h3>
+                            <i class="fas fa-map-marked-alt"></i> Comprovante de Endereço
+                            <span id="comprovante-status" class="status-badge status-pending">Pendente</span>
+                        </h3>
+                        <p>Envie um comprovante de endereço comercial recente (últimos 3 meses)</p>
+
+                        <div id="comprovante-upload-area" class="upload-area" data-type="comprovante">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <p>Clique ou arraste o arquivo aqui</p>
+                            <input type="file" id="comprovante-input" class="file-input" data-type="comprovante" accept="image/*,.pdf">
+                        </div>
+
+                        <div id="comprovante-preview" class="preview-container"></div>
+
+                        <div id="comprovante-feedback" class="feedback-container" style="display: none;">
+                            <h4>Feedback da Análise:</h4>
+                            <p id="comprovante-feedback-text"></p>
+                        </div>
+                    </div>
+
+                    <!-- Contrato Social -->
+                    <div class="document-section" data-aos="fade-up" data-aos-delay="300">
+                        <h3>
+                            <i class="fas fa-file-contract"></i> Contrato Social
+                            <span id="contrato-status" class="status-badge status-pending">Pendente</span>
+                        </h3>
+                        <p>Envie o contrato social ou documento equivalente da sua empresa</p>
+
+                        <div id="contrato-upload-area" class="upload-area" data-type="contrato">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <p>Clique ou arraste o arquivo aqui</p>
+                            <input type="file" id="contrato-input" class="file-input" data-type="contrato" accept="image/*,.pdf">
+                        </div>
+
+                        <div id="contrato-preview" class="preview-container"></div>
+
+                        <div id="contrato-feedback" class="feedback-container" style="display: none;">
+                            <h4>Feedback da Análise:</h4>
+                            <p id="contrato-feedback-text"></p>
+                        </div>
+                    </div>
+
+                    <!-- Documentos dos Representantes -->
+                    <div class="document-section" data-aos="fade-up" data-aos-delay="400">
+                        <h3>
+                            <i class="fas fa-id-card"></i> Documentos dos Representantes
+                            <span id="representantes-status" class="status-badge status-pending">Pendente</span>
+                        </h3>
+                        <p>Envie os documentos dos representantes legais da empresa (CPF)</p>
+
+                        <div id="representantes-container">
+                            <!-- Os itens de representantes serão adicionados aqui dinamicamente -->
+                        </div>
+
+                        <button type="button" id="add-representative" class="add-representative">
+                            <i class="fas fa-plus"></i> Adicionar Representante
+                        </button>
+
+                        <div id="representantes-feedback" class="feedback-container" style="display: none;">
+                            <h4>Feedback da Análise:</h4>
+                            <p id="representantes-feedback-text"></p>
+                        </div>
+                    </div>
+
+                    <!-- Barra de Progresso -->
+                    <div id="progress-container" class="progress-container">
+                        <div id="progress-bar" class="progress-bar">0%</div>
+                        <div id="progress-text" class="progress-text">Preparando arquivos...</div>
+                    </div>
+
+                    <!-- Botão de Envio -->
+                    <div class="submit-container">
+                        <button type="submit"
+                            style="width: 100%; text-align: center; align-self: center; justify-content: center;"
+                            id="submit-docs" class="btn-submit-docs">
+                            <i class="fas fa-paper-plane"></i> Enviar Documentação
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        const API_BASE = 'https://localhost:7083/';
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // Inicialização do AOS
+            AOS.init();
+
+            // Obter token da URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const token = urlParams.get('token');
+
+            // Se não tiver token, redirecionar para página inicial
+            if (!token) {
+                window.location.href = 'index.html';
+                return;
+            }
+
+            // Verificar status da documentação
+            checkDocumentationStatus(token);
+
+            // Configurar áreas de upload
+            setupUploadArea('logotipo');
+            setupUploadArea('fotos', true); // múltiplos arquivos
+            setupUploadArea('comprovante');
+            setupUploadArea('contrato');
+
+            // Adicionar representante inicial
+            addRepresentative("");
+
+            // Evento para adicionar representante
+            document.getElementById('add-representative').addEventListener('click', function () { addRepresentative("") });
+
+            // Submissão do formulário
+            document.getElementById('documentacaoForm').addEventListener('submit', function (e) {
+                e.preventDefault();
+                submitDocumentationInParts(token);
+            });
+
+            // Remover preloader quando a página estiver carregada
+            window.addEventListener('load', function () {
+                const preloader = document.querySelector('.preloader');
+                setTimeout(() => {
+                    preloader.style.opacity = '0';
+                    setTimeout(() => {
+                        preloader.style.display = 'none';
+                    }, 500);
+                }, 1000);
+            });
+        });
+
+        // Verificar status da documentação
+        function checkDocumentationStatus(token) {
+            fetch(`${API_BASE}api/CredenciadoPreCadastro/documentacao/${token}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Token inválido ou expirado');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log("Dados recebidos:", data);
+
+                    // Preencher previews e status para cada documento
+                    updateDocumentStatus('logotipo', data.logotipo, data.logotipoOk, data.logotipoMotivo);
+                    
+                    // Para documentos que podem ser PDF ou imagem, verificar a extensão
+                    updateDocumentWithTypeCheck('comprovante', data.comprovanteResidencia, data.comprovanteResidenciaOk, data.comprovanteResidenciaMotivo);
+                    updateDocumentWithTypeCheck('contrato', data.contratoSocial, data.contratoSocialOk, data.contratoSocialMotivo);
+
+                    // Tratar fotos do estabelecimento (array ou string)
+                    if (data.fotosEstabelecimento && data.fotosEstabelecimento !== "") {
+                        let fotos;
+                        if (typeof data.fotosEstabelecimento === 'string') {
+                            fotos = data.fotosEstabelecimento.split(',').filter(f => f.trim() !== '');
+                        } else if (Array.isArray(data.fotosEstabelecimento)) {
+                            fotos = data.fotosEstabelecimento;
+                        }
+
+                        if (fotos && fotos.length > 0) {
+                            fotos.forEach(foto => {
+                                addImagePreview('fotos', API_BASE?.replace("api", "")+foto);
+                            });
+                        }
+
+                        updateStatusBadge('fotos', data.fotosEstabelecimentoOk);
+
+                        if (data.fotosEstabelecimentoOk === false) {
+                            showFeedback('fotos', data.fotosEstabelecimentoMotivo, true);
+                        } else if (data.fotosEstabelecimentoOk === true) {
+                            showFeedback('fotos', 'Fotos aprovadas!', false);
+                        }
+                    }
+
+                    // Tratar representantes (string JSON ou array)
+                    if (data.documentoRepresentantes && data.documentoRepresentantes !== "") {
+                        try {
+                            let representantes;
+
+                            if (typeof data.documentoRepresentantes === 'string') {
+                                representantes = JSON.parse(data.documentoRepresentantes);
+                            } else if (Array.isArray(data.documentoRepresentantes)) {
+                                representantes = data.documentoRepresentantes;
+                            } else {
+                                representantes = [];
+                            }
+
+                            if (Array.isArray(representantes) && representantes.length > 0) {
+                                // Limpar container de representantes
+                                document.getElementById('representantes-container').innerHTML = '';
+
+                                // Adicionar cada representante
+                                representantes.forEach(rep => {
+                                    const repElement = addRepresentative(rep.nomeCompleto || rep.NomeCompleto || "");
+
+                                    if (rep.FotoCPF) {
+                                        const previewContainer = repElement.querySelector('.preview-container');
+                                        const isPDF = rep.FotoCPF.toLowerCase().endsWith('.pdf');
+                                        
+                                        if (isPDF) {
+                                            const fileName = rep.FotoCPF.split('/').pop();
+                                            addPdfPreview(previewContainer.id, fileName);
+                                        } else {
+                                            addImagePreview(previewContainer.id, (API_BASE?.replace("api", "")+rep.FotoCPF));
+                                        }
+                                    }
+
+                                    // Atualizar status do representante
+                                    if (rep.aprovado === true || rep.Aprovado === true) {
+                                        const statusElement = repElement.querySelector('.status-badge');
+                                        statusElement.className = 'status-badge status-approved';
+                                        statusElement.textContent = 'Aprovado';
+                                    } else if (rep.reprovado === true || rep.Reprovado === true) {
+                                        const statusElement = repElement.querySelector('.status-badge');
+                                        statusElement.className = 'status-badge status-rejected';
+                                        statusElement.textContent = 'Reprovado';
+
+                                        // Mostrar feedback
+                                        const feedbackContainer = repElement.querySelector('.feedback-container');
+                                        const feedbackText = repElement.querySelector('.feedback-text');
+                                        feedbackContainer.style.display = 'block';
+                                        feedbackContainer.classList.add('rejected');
+                                        feedbackText.textContent = rep.motivo || rep.Motivo || 'Documento reprovado. Por favor, envie novamente.';
+                                    }
+                                });
+
+                                // Atualizar status geral dos representantes
+                                const algumReprovado = representantes.some(rep => rep.Reprovado == true);
+                                const algumAprovado = representantes.some(rep => rep.Reprovado == true);
+                                const algumNulo = representantes.some(rep => rep.Reprovado == null);
+
+                                console.log(algumReprovado, algumAprovado, algumNulo)
+
+                                let valid = (algumNulo) ? null : algumReprovado ? false : algumAprovado ? true : false;
+
+                                updateStatusBadge('representantes', valid);
+                            }
+                        } catch (error) {
+                            console.error('Erro ao processar representantes:', error);
+                            // Inicializar um representante vazio se houver erro
+                            document.getElementById('representantes-container').innerHTML = '';
+                            addRepresentative();
+                        }
+                    }
+
+                    // Verificar se todos os documentos foram aprovados
+                    const allApproved =
+                        data.logotipoOk === true &&
+                        data.fotosEstabelecimentoOk === true &&
+                        data.comprovanteResidenciaOk === true &&
+                        data.contratoSocialOk === true &&
+                        data.documentoRepresentantesOk === true;
+
+                    // Verificar se algum documento foi reprovado
+                    const someRejected =
+                        data.logotipoOk === false ||
+                        data.fotosEstabelecimentoOk === false ||
+                        data.comprovanteResidenciaOk === false ||
+                        data.contratoSocialOk === false ||
+                        data.documentoRepresentantesOk === false;
+
+                    // Mostrar mensagem apropriada
+                    if (allApproved) {
+                        showAllApprovedMessage();
+                    } else if (someRejected) {
+                        showSomeRejectedMessage();
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro ao verificar status da documentação:', error);
+                    // Mostrar mensagem de erro
+                    const statusMessage = document.getElementById('status-message');
+                    statusMessage.className = 'some-rejected-message';
+                    statusMessage.innerHTML = `
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <h3>Link Inválido ou Expirado</h3>
+                        <p>O link que você está tentando acessar é inválido ou expirou. Por favor, entre em contato com a equipe VCar Clube para obter um novo link.</p>
+                    `;
+                    statusMessage.style.display = 'block';
+
+                    // Esconder formulário
+                    document.getElementById('documentacao-container').style.display = 'none';
+                });
+        }
+
+        // Atualizar status de um documento (apenas para imagens)
+        function updateDocumentStatus(type, url, isApproved, feedback) {
+            if (url) {
+                // Adicionar preview
+                addImagePreview(type, API_BASE?.replace("api", "")+url);
+
+                // Atualizar status
+                updateStatusBadge(type, isApproved);
+
+                // Mostrar feedback se reprovado
+                if (isApproved === false) {
+                    showFeedback(type, feedback, true);
+                } else if (isApproved === true) {
+                    showFeedback(type, 'Documento aprovado!', false);
+                }
+            }
+        }
+
+        // Nova função para atualizar documento com verificação de tipo
+        function updateDocumentWithTypeCheck(type, url, isApproved, feedback) {
+            if (url) {
+                // Verificar se é um PDF ou uma imagem pela extensão
+                const isPDF = url.toLowerCase().endsWith('.pdf');
+                
+                if (isPDF) {
+                    // Extrair nome do arquivo da URL
+                    const fileName = url.split('/').pop();
+                    addPdfPreview(type, fileName);
+                                } else {
+                    // Tratar como imagem
+                    addImagePreview(type, API_BASE?.replace("api", "")+url);
+                }
+
+                // Atualizar status
+                updateStatusBadge(type, isApproved);
+
+                // Mostrar feedback se reprovado
+                if (isApproved === false) {
+                    showFeedback(type, feedback, true);
+                } else if (isApproved === true) {
+                    showFeedback(type, 'Documento aprovado!', false);
+                }
+            }
+        }
+
+        // Configurar área de upload
+        function setupUploadArea(type, multiple = false) {
+            const uploadArea = document.getElementById(`${type}-upload-area`);
+            const fileInput = document.getElementById(`${type}-input`);
+
+            // Configurar múltiplos arquivos
+            if (multiple) {
+                fileInput.setAttribute('multiple', 'multiple');
+            }
+
+            // Clicar na área de upload
+            uploadArea.addEventListener('click', function () {
+                fileInput.click();
+            });
+
+            // Arrastar e soltar
+            uploadArea.addEventListener('dragover', function (e) {
+                e.preventDefault();
+                uploadArea.classList.add('active');
+            });
+
+            uploadArea.addEventListener('dragleave', function () {
+                uploadArea.classList.remove('active');
+            });
+
+            uploadArea.addEventListener('drop', function (e) {
+                e.preventDefault();
+                uploadArea.classList.remove('active');
+
+                if (multiple) {
+                    handleFiles(type, e.dataTransfer.files);
+                } else {
+                    handleFiles(type, [e.dataTransfer.files[0]]);
+                }
+            });
+
+            // Selecionar arquivo
+            fileInput.addEventListener('change', function () {
+                if (multiple) {
+                    handleFiles(type, this.files);
+                } else {
+                    handleFiles(type, [this.files[0]]);
+                }
+            });
+        }
+
+        // Lidar com arquivos selecionados
+        function handleFiles(type, files) {
+            if (!files || files.length === 0) return;
+
+            // Limpar preview se não for múltiplo
+            if (type !== 'fotos' && !type.startsWith('rep-preview-')) {
+                document.getElementById(`${type}-preview`).innerHTML = '';
+            }
+
+            // Para cada arquivo
+            Array.from(files).forEach(file => {
+                // Verificar tamanho do arquivo (10MB)
+                if (file.size > 10485760) {
+                    alert(`O arquivo "${file.name}" excede o tamanho máximo permitido (10MB). Por favor, reduza o tamanho do arquivo.`);
+                    return;
+                }
+
+                // Verificar tipo de arquivo
+                if (file.type.startsWith('image/')) {
+                    // Imagem - comprimir antes de exibir preview
+                    compressImage(file, 1200, 0.7, (compressedFile, compressedDataUrl) => {
+                        if (type.startsWith('rep-preview-')) {
+                            addImagePreview(type, compressedDataUrl, file.name, true, compressedFile);
+                        } else {
+                            addImagePreview(type, compressedDataUrl, file.name, true, compressedFile);
+                        }
+                    });
+                } else if (file.type === 'application/pdf') {
+                    // PDF
+                    if (type.startsWith('rep-preview-')) {
+                        const previewContainer = document.getElementById(type);
+                        addPdfPreview(previewContainer, file.name, file);
+                    } else {
+                        addPdfPreview(type, file.name, file);
+                    }
+                } else {
+                    alert(`O tipo de arquivo "${file.type}" não é suportado. Por favor, envie imagens (JPG, PNG) ou PDFs.`);
+                }
+            });
+        }
+
+        function compressImage(file, maxWidth, quality, callback) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                const img = new Image();
+                img.onload = function () {
+                    // Calcular novas dimensões mantendo a proporção
+                    let width = img.width;
+                    let height = img.height;
+
+                    if (width > maxWidth) {
+                        height = (height * maxWidth) / width;
+                        width = maxWidth;
+                    }
+
+                    const canvas = document.createElement('canvas');
+                    canvas.width = width;
+                    canvas.height = height;
+
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, width, height);
+
+                    // Converter para blob com compressão
+                    canvas.toBlob(
+                        (blob) => {
+                            // Criar um novo arquivo a partir do blob
+                            const compressedFile = new File([blob], file.name, {
+                                type: file.type,
+                                lastModified: file.lastModified
+                            });
+
+                            // Converter para data URL para preview
+                            const reader = new FileReader();
+                            reader.onload = function (e) {
+                                callback(compressedFile, e.target.result);
+                            };
+                            reader.readAsDataURL(blob);
+                        },
+                        file.type,
+                        quality
+                    );
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // Adicionar preview de imagem
+        function addImagePreview(type, src, fileName = '', isNew = false, originalFile = null) {
+            let previewContainer;
+
+            if (type.startsWith('rep-preview-')) {
+                previewContainer = document.getElementById(type);
+            } else {
+                previewContainer = document.getElementById(`${type}-preview`);
+            }
+
+            const previewItem = document.createElement('div');
+            previewItem.className = 'preview-item';
+
+            const img = document.createElement('img');
+            img.src = src;
+            img.alt = fileName || 'Preview';
+
+            // Armazenar o arquivo original se disponível
+            if (originalFile) {
+                img.dataset.file = originalFile;
+            }
+
+            previewItem.appendChild(img);
+
+            // Adicionar botão de remover apenas para novos arquivos
+            if (isNew) {
+                const removeBtn = document.createElement('button');
+                removeBtn.className = 'remove-btn';
+                removeBtn.innerHTML = '<i class="fas fa-times"></i>';
+                removeBtn.addEventListener('click', function () {
+                    previewContainer.removeChild(previewItem);
+                });
+
+                previewItem.appendChild(removeBtn);
+            }
+
+            previewContainer.appendChild(previewItem);
+        }
+
+        // Adicionar preview de PDF
+        function addPdfPreview(type, fileName, file = null) {
+            let previewContainer;
+
+            if (typeof type === 'object' && type.nodeType) {
+                previewContainer = type;
+            } else if (type.startsWith('rep-preview-')) {
+                previewContainer = document.getElementById(type);
+            } else {
+                previewContainer = document.getElementById(`${type}-preview`);
+            }
+
+            const previewPdf = document.createElement('div');
+            previewPdf.className = 'preview-pdf';
+
+            previewPdf.innerHTML = `
+                <i class="fas fa-file-pdf"></i>
+                <div class="file-name">${fileName}</div>
+                <button class="remove-btn"><i class="fas fa-times"></i></button>
+            `;
+
+            // Armazenar o arquivo para envio posterior
+            if (file) {
+                previewPdf.dataset.file = file;
+            }
+
+            // Adicionar evento para remover
+            previewPdf.querySelector('.remove-btn').addEventListener('click', function () {
+                previewContainer.removeChild(previewPdf);
+            });
+
+            previewContainer.appendChild(previewPdf);
+        }
+
+        // Adicionar representante
+        function addRepresentative(nome = '') {
+            const container = document.getElementById('representantes-container');
+            const index = container.children.length;
+
+            const repItem = document.createElement('div');
+            repItem.className = 'representative-item';
+            repItem.id = `representative-${index}`;
+
+            repItem.innerHTML = `
+                <div class="representative-header">
+                    <h4>Representante ${index + 1}</h4>
+                    <span class="status-badge status-pending">Pendente</span>
+                    <button type="button" class="remove-representative"><i class="fas fa-times"></i></button>
+                </div>
+                
+                <div class="form-group">
+                    <label for="rep-nome-${index}">Nome Completo</label>
+                    <input type="text" id="rep-nome-${index}" name="rep-nome-${index}" value="${nome || ""}" placeholder="Nome completo do representante" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Documento de Identificação (CPF)</label>
+                    <div id="rep-upload-area-${index}" class="upload-area" data-type="rep-preview-${index}">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <p>Clique ou arraste o arquivo aqui</p>
+                        <input type="file" id="rep-input-${index}" class="file-input" data-type="rep-preview-${index}" accept="image/*,.pdf">
+                    </div>
+                    
+                    <div id="rep-preview-${index}" class="preview-container"></div>
+                </div>
+                
+                <div class="feedback-container" style="display: none;">
+                    <h4>Feedback da Análise:</h4>
+                    <p class="feedback-text"></p>
+                </div>
+            `;
+
+            container.appendChild(repItem);
+
+            // Configurar área de upload
+            const uploadArea = document.getElementById(`rep-upload-area-${index}`);
+            const fileInput = document.getElementById(`rep-input-${index}`);
+
+            // Clicar na área de upload
+            uploadArea.addEventListener('click', function () {
+                fileInput.click();
+            });
+
+            // Arrastar e soltar
+            uploadArea.addEventListener('dragover', function (e) {
+                e.preventDefault();
+                uploadArea.classList.add('active');
+            });
+
+            uploadArea.addEventListener('dragleave', function () {
+                uploadArea.classList.remove('active');
+            });
+
+            uploadArea.addEventListener('drop', function (e) {
+                e.preventDefault();
+                uploadArea.classList.remove('active');
+                handleFiles(`rep-preview-${index}`, [e.dataTransfer.files[0]]);
+            });
+
+            // Selecionar arquivo
+            fileInput.addEventListener('change', function () {
+                handleFiles(`rep-preview-${index}`, [this.files[0]]);
+            });
+
+            // Remover representante
+            repItem.querySelector('.remove-representative').addEventListener('click', function () {
+                if (container.children.length > 1) {
+                    container.removeChild(repItem);
+                    // Atualizar numeração
+                    Array.from(container.children).forEach((item, i) => {
+                        item.querySelector('h4').textContent = `Representante ${i + 1}`;
+                    });
+                } else {
+                    alert('É necessário pelo menos um representante.');
+                }
+            });
+
+            return repItem;
+        }
+
+        // Atualizar badge de status
+        function updateStatusBadge(type, isApproved) {
+            const statusBadge = document.getElementById(`${type}-status`);
+
+            if (isApproved === true) {
+                statusBadge.className = 'status-badge status-approved';
+                statusBadge.textContent = 'Aprovado';
+            } else if (isApproved === false) {
+                statusBadge.className = 'status-badge status-rejected';
+                statusBadge.textContent = 'Reprovado';
+            } else {
+                statusBadge.className = 'status-badge status-pending';
+                statusBadge.textContent = 'Pendente';
+            }
+        }
+
+        // Mostrar feedback
+        function showFeedback(type, message, isRejected) {
+            const feedbackContainer = document.getElementById(`${type}-feedback`);
+            const feedbackText = document.getElementById(`${type}-feedback-text`);
+
+            feedbackContainer.style.display = 'block';
+
+            if (isRejected) {
+                feedbackContainer.classList.add('rejected');
+            } else {
+                feedbackContainer.classList.remove('rejected');
+            }
+
+            feedbackText.textContent = message || 'Sem feedback disponível.';
+        }
+
+        // Mostrar mensagem de todos aprovados
+        function showAllApprovedMessage() {
+            const statusMessage = document.getElementById('status-message');
+            statusMessage.className = 'all-approved-message';
+            statusMessage.innerHTML = `
+                <i class="fas fa-check-circle"></i>
+                <h3>Todos os Documentos Aprovados!</h3>
+                <p>Parabéns! Todos os seus documentos foram aprovados. Nossa equipe entrará em contato em breve para finalizar o processo de credenciamento.</p>
+            `;
+            statusMessage.style.display = 'block';
+
+            // Desabilitar botão de envio
+            document.getElementById('submit-docs').disabled = true;
+            document.getElementById('submit-docs').innerHTML = '<i class="fas fa-check"></i> Documentação Aprovada';
+        }
+
+        // Mostrar mensagem de alguns reprovados
+        function showSomeRejectedMessage() {
+            const statusMessage = document.getElementById('status-message');
+            statusMessage.className = 'some-rejected-message';
+            statusMessage.innerHTML = `
+                <i class="fas fa-exclamation-triangle"></i>
+                <h3>Alguns Documentos Precisam de Correção</h3>
+                <p>Alguns documentos foram reprovados. Por favor, verifique o feedback em cada seção e envie os documentos corrigidos.</p>
+            `;
+            statusMessage.style.display = 'block';
+        }
+
+        // Converter Data URI para Blob
+        function dataURItoBlob(dataURI) {
+            // Verificar se é uma URL externa ou inválida
+            if (!dataURI || !dataURI.startsWith('data:')) {
+                console.error('URI inválida para conversão em Blob:', dataURI);
+                return new Blob([''], { type: 'application/octet-stream' }); // Blob vazio como fallback
+            }
+
+            try {
+                // Extrair a parte de dados e o tipo MIME
+                const arr = dataURI.split(',');
+                const mime = arr[0].match(/:(.*?);/)[1];
+                const bstr = atob(arr[1]);
+                let n = bstr.length;
+                const u8arr = new Uint8Array(n);
+
+                while (n--) {
+                    u8arr[n] = bstr.charCodeAt(n);
+                }
+
+                return new Blob([u8arr], { type: mime });
+            } catch (error) {
+                console.error('Erro ao converter Data URI para Blob:', error);
+                return new Blob([''], { type: 'application/octet-stream' }); // Blob vazio como fallback
+            }
+        }
+
+        // Função para enviar um único arquivo
+        async function uploadArquivo(file, token, tipo, indice = "") {
+            const formData = new FormData();
+            formData.append('arquivo', file);
+            formData.append('token', token);
+            formData.append('tipo', tipo);
+            
+            if (indice !== "") {
+                formData.append('indice', indice);
+            }
+            
+            try {
+                const response = await fetch(`${API_BASE}api/CredenciadoPreCadastro/upload-parte`, {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`Erro ao enviar arquivo: ${response.status} ${response.statusText}`);
+                }
+                
+                return await response.json();
+            } catch (error) {
+                console.error('Erro ao fazer upload:', error);
+                throw error;
+            }
+        }
+
+        // Função principal para enviar documentação em partes
+        async function submitDocumentationInParts(token) {
+            // Verificar se há documentos para enviar
+            const hasLogotipo = document.getElementById('logotipo-preview').children.length > 0;
+            const hasFotos = document.getElementById('fotos-preview').children.length >= 3;
+            const hasComprovante = document.getElementById('comprovante-preview').children.length > 0;
+            const hasContrato = document.getElementById('contrato-preview').children.length > 0;
+            
+            // Verificar representantes
+            const representantesContainer = document.getElementById('representantes-container');
+            const representantes = Array.from(representantesContainer.children);
+            const hasRepresentantes = representantes.every(rep => {
+                const nome = rep.querySelector('input[type="text"]').value;
+                const preview = rep.querySelector('.preview-container').children.length > 0;
+                return nome && preview;
+            });
+
+            // Validações
+            if (!hasLogotipo) {
+                alert('Por favor, envie o logotipo da oficina.');
+                document.getElementById('logotipo-upload-area').scrollIntoView({ behavior: 'smooth' });
+                return;
+            }
+            
+            if (!hasFotos) {
+                alert('Por favor, envie pelo menos 3 fotos do estabelecimento.');
+                document.getElementById('fotos-upload-area').scrollIntoView({ behavior: 'smooth' });
+                return;
+            }
+            
+            if (!hasComprovante) {
+                alert('Por favor, envie o comprovante de endereço.');
+                document.getElementById('comprovante-upload-area').scrollIntoView({ behavior: 'smooth' });
+                return;
+            }
+            
+            if (!hasContrato) {
+                alert('Por favor, envie o contrato social.');
+                document.getElementById('contrato-upload-area').scrollIntoView({ behavior: 'smooth' });
+                return;
+            }
+            
+            if (!hasRepresentantes) {
+                alert('Por favor, preencha o nome e envie o documento de todos os representantes.');
+                document.getElementById('representantes-container').scrollIntoView({ behavior: 'smooth' });
+                return;
+            }
+            
+            try {
+                // Mostrar loading no botão
+                const submitButton = document.getElementById('submit-docs');
+                const originalText = submitButton.innerHTML;
+                submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+                submitButton.disabled = true;
+                
+                // Mostrar barra de progresso
+                const progressContainer = document.getElementById('progress-container');
+                const progressBar = document.getElementById('progress-bar');
+                const progressText = document.getElementById('progress-text');
+                progressContainer.style.display = 'block';
+                progressBar.style.width = '0%';
+                progressBar.textContent = '0%';
+                progressText.textContent = 'Preparando arquivos...';
+                
+                // Objeto para armazenar os caminhos dos arquivos enviados
+                const uploadedFiles = {
+                    logotipo: "",
+                    fotosEstabelecimento: [],
+                    comprovanteResidencia: "",
+                    contratoSocial: "",
+                    representantes: []
+                };
+                
+                // Calcular total de arquivos para upload
+                const fotosCount = document.getElementById('fotos-preview').querySelectorAll('img').length;
+                const representantesCount = representantes.length;
+                const totalFiles = 1 + fotosCount + 1 + 1 + representantesCount; // logotipo + fotos + comprovante + contrato + representantes
+                let filesUploaded = 0;
+                
+                // Função para atualizar progresso
+                const updateProgress = (file, isComplete = false) => {
+                    filesUploaded++;
+                    const percent = Math.round((filesUploaded / totalFiles) * 100);
+                    
+                    progressBar.style.width = `${percent}%`;
+                    progressBar.textContent = `${percent}%`;
+                    
+                    if (isComplete) {
+                        progressText.textContent = 'Upload completo! Finalizando...';
+                    } else {
+                        progressText.textContent = `Enviando ${file}... ${percent}%`;
+                    }
+                };
+                
+                // 1. Upload do logotipo
+                const logotipoPreview = document.getElementById('logotipo-preview').querySelector('img');
+                if (logotipoPreview) {
+                    progressText.textContent = 'Enviando logotipo...';
+                    
+                    // Obter o arquivo do logotipo
+                    let logotipoFile;
+                    if (logotipoPreview.src.startsWith('data:')) {
+                        logotipoFile = dataURItoBlob(logotipoPreview.src);
+                        const result = await uploadArquivo(new File([logotipoFile], 'logotipo.jpg'), token, 'logotipo');
+                        uploadedFiles.logotipo = result.caminho;
+                        updateProgress('logotipo');
+                    } else if (logotipoPreview.dataset && logotipoPreview.dataset.file) {
+                        // Se já temos o arquivo armazenado
+                        const fileObj = logotipoPreview.dataset.file;
+                        const result = await uploadArquivo(fileObj, token, 'logotipo');
+                        uploadedFiles.logotipo = result.caminho;
+                        updateProgress('logotipo');
+                    }
+                }
+                
+                // 2. Upload das fotos
+                const fotosPreview = document.getElementById('fotos-preview').querySelectorAll('img');
+                for (let i = 0; i < fotosPreview.length; i++) {
+                    const img = fotosPreview[i];
+                    progressText.textContent = `Enviando foto ${i+1} de ${fotosPreview.length}...`;
+                    
+                    if (img.src.startsWith('data:')) {
+                        const fotoFile = dataURItoBlob(img.src);
+                        const result = await uploadArquivo(new File([fotoFile], `foto_${i}.jpg`), token, 'fotos', i.toString());
+                        uploadedFiles.fotosEstabelecimento.push(result.caminho);
+                        updateProgress(`foto ${i+1}`);
+                    } else if (img.dataset && img.dataset.file) {
+                        const fileObj = img.dataset.file;
+                        const result = await uploadArquivo(fileObj, token, 'fotos', i.toString());
+                        uploadedFiles.fotosEstabelecimento.push(result.caminho);
+                        updateProgress(`foto ${i+1}`);
+                    }
+                }
+                
+                // 3. Upload do comprovante
+                const comprovantePreview = document.getElementById('comprovante-preview').querySelector('img, .preview-pdf');
+                if (comprovantePreview) {
+                    progressText.textContent = 'Enviando comprovante de residência...';
+                    
+                    if (comprovantePreview.tagName === 'IMG' && comprovantePreview.src.startsWith('data:')) {
+                        const comprovanteFile = dataURItoBlob(comprovantePreview.src);
+                        const result = await uploadArquivo(new File([comprovanteFile], 'comprovante.jpg'), token, 'comprovante');
+                        uploadedFiles.comprovanteResidencia = result.caminho;
+                        updateProgress('comprovante');
+                    } else if (comprovantePreview.classList.contains('preview-pdf')) {
+                        const fileInput = document.getElementById('comprovante-input');
+                        if (fileInput && fileInput.files.length > 0) {
+                            const result = await uploadArquivo(fileInput.files[0], token, 'comprovante');
+                            uploadedFiles.comprovanteResidencia = result.caminho;
+                            updateProgress('comprovante');
+                        } else if (comprovantePreview.dataset && comprovantePreview.dataset.file) {
+                            const fileObj = comprovantePreview.dataset.file;
+                            const result = await uploadArquivo(fileObj, token, 'comprovante');
+                            uploadedFiles.comprovanteResidencia = result.caminho;
+                            updateProgress('comprovante');
+                        }
+                    }
+                }
+                
+                // 4. Upload do contrato
+                const contratoPreview = document.getElementById('contrato-preview').querySelector('img, .preview-pdf');
+                if (contratoPreview) {
+                    progressText.textContent = 'Enviando contrato social...';
+                    
+                    if (contratoPreview.tagName === 'IMG' && contratoPreview.src.startsWith('data:')) {
+                        const contratoFile = dataURItoBlob(contratoPreview.src);
+                        const result = await uploadArquivo(new File([contratoFile], 'contrato.jpg'), token, 'contrato');
+                        uploadedFiles.contratoSocial = result.caminho;
+                        updateProgress('contrato');
+                    } else if (contratoPreview.classList.contains('preview-pdf')) {
+                        const fileInput = document.getElementById('contrato-input');
+                        if (fileInput && fileInput.files.length > 0) {
+                            const result = await uploadArquivo(fileInput.files[0], token, 'contrato');
+                            uploadedFiles.contratoSocial = result.caminho;
+                            updateProgress('contrato');
+                        } else if (contratoPreview.dataset && contratoPreview.dataset.file) {
+                            const fileObj = contratoPreview.dataset.file;
+                            const result = await uploadArquivo(fileObj, token, 'contrato');
+                            uploadedFiles.contratoSocial = result.caminho;
+                            updateProgress('contrato');
+                        }
+                    }
+                }
+                
+                // 5. Upload dos documentos dos representantes
+                for (let i = 0; i < representantes.length; i++) {
+                    const rep = representantes[i];
+                    progressText.textContent = `Enviando documento do representante ${i+1} de ${representantes.length}...`;
+                    
+                    const nome = rep.querySelector('input[type="text"]').value;
+                    const docPreview = rep.querySelector('.preview-container img, .preview-container .preview-pdf');
+                    
+                    let fotoCPF = "";
+                    
+                    if (docPreview) {
+                        if (docPreview.tagName === 'IMG' && docPreview.src.startsWith('data:')) {
+                            const docFile = dataURItoBlob(docPreview.src);
+                            const result = await uploadArquivo(new File([docFile], `documento_${i}.jpg`), token, 'representante', i.toString());
+                            fotoCPF = result.caminho;
+                            updateProgress(`representante ${i+1}`);
+                        } else if (docPreview.classList.contains('preview-pdf')) {
+                            const fileInput = rep.querySelector('input[type="file"]');
+                            if (fileInput && fileInput.files.length > 0) {
+                                const result = await uploadArquivo(fileInput.files[0], token, 'representante', i.toString());
+                                fotoCPF = result.caminho;
+                                updateProgress(`representante ${i+1}`);
+                            } else if (docPreview.dataset && docPreview.dataset.file) {
+                                const fileObj = docPreview.dataset.file;
+                                const result = await uploadArquivo(fileObj, token, 'representante', i.toString());
+                                fotoCPF = result.caminho;
+                                updateProgress(`representante ${i+1}`);
+                            }
+                        }
+                    }
+                    
+                    uploadedFiles.representantes.push({
+                        nomeCompleto: nome,
+                        fotoCPF: fotoCPF,
+                        indice: i
+                    });
+                }
+                
+                // 6. Finalizar documentação
+                progressText.textContent = 'Finalizando envio da documentação...';
+                progressBar.style.width = '100%';
+                progressBar.textContent = '100%';
+                
+                const response = await fetch(`${API_BASE}api/CredenciadoPreCadastro/finalizar-documentacao`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        token: token,
+                        logotipo: uploadedFiles.logotipo,
+                        fotosEstabelecimento: uploadedFiles.fotosEstabelecimento,
+                        comprovanteResidencia: uploadedFiles.comprovanteResidencia,
+                        contratoSocial: uploadedFiles.contratoSocial,
+                        representantes: uploadedFiles.representantes
+                    })
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`Erro ao finalizar documentação: ${response.status} ${response.statusText}`);
+                }
+                
+                updateProgress('', true);
+                
+                // Mostrar mensagem de sucesso
+                alert('Documentação enviada com sucesso! Nossa equipe irá analisar e entraremos em contato em breve.');
+                
+                // Recarregar a página para atualizar status
+                window.location.reload();
+            } catch (error) {
+                console.error('Erro ao enviar documentação:', error);
+                alert('Ocorreu um erro ao enviar a documentação: ' + error.message);
+                
+                // Restaurar botão
+                const submitButton = document.getElementById('submit-docs');
+                submitButton.innerHTML = originalText;
+                submitButton.disabled = false;
+                
+                // Ocultar barra de progresso
+                document.getElementById('progress-container').style.display = 'none';
+            }
+        }
+    </script>
+</body>
+
+</html>
