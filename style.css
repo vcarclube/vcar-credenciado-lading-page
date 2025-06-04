@@ -2400,6 +2400,7 @@ input:checked + .slider:before {
 
 @media (max-width: 768px) {
     /* Correção para o problema de horizontal scroll em dispositivos móveis */
+
     body {
         overflow-x: hidden;
         width: 100%;
@@ -2526,6 +2527,11 @@ input:checked + .slider:before {
 
 @media (max-width: 576px) {
     /* Correções adicionais para telas muito pequenas */
+
+    .hero-content{
+        margin-top: 300px;
+    }
+
     .header-buttons .btn-outline {
         display: none;
     }
@@ -3022,46 +3028,82 @@ svg {
 
 /* Resultados Section */
 .resultados {
-    padding: 100px 0;
-    background: linear-gradient(135deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.6) 100%), url('https://via.placeholder.com/1920x1080/333333/666666?text=Resultados+Background') no-repeat center center/cover;
+    padding: 100px 20px; /* Adicionado padding lateral */
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.6) 100%);
     color: var(--white);
+    overflow-x: hidden; /* Evita scroll horizontal */
 }
 
 .resultados-content {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    gap: 50px;
+    gap: 30px; /* Reduzido de 50px para 30px */
+    max-width: 100%; /* Garante que não ultrapasse a largura */
+    box-sizing: border-box;
 }
 
 .resultados-text {
     flex: 1;
-    min-width: 300px;
+    min-width: 280px; /* Reduzido de 300px para 280px */
+    max-width: 100%; /* Evita ultrapassar a largura */
+    box-sizing: border-box;
 }
 
 .resultados-text h3 {
-    font-size: 2rem;
+    font-size: clamp(1.5rem, 4vw, 2rem); /* Responsivo */
     font-weight: 700;
     margin-bottom: 20px;
     line-height: 1.2;
+    word-wrap: break-word; /* Quebra palavras longas */
 }
 
 .resultados-text p {
     margin-bottom: 30px;
     opacity: 0.9;
-    font-size: 1.1rem;
+    font-size: clamp(1rem, 2.5vw, 1.1rem); /* Responsivo */
+    word-wrap: break-word;
 }
 
 .resultados-stats {
     display: flex;
     flex-wrap: wrap;
-    gap: 30px;
+    gap: 20px; /* Reduzido de 30px para 20px */
     margin-bottom: 30px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .resultados-stat {
     flex: 1;
-    min-width: 150px;
+    min-width: 120px; /* Reduzido de 150px para 120px */
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+/* Media query para dispositivos móveis */
+@media (max-width: 768px) {
+    .resultados {
+        padding: 60px 15px;
+    }
+    
+    .resultados-content {
+        gap: 20px;
+        flex-direction: column;
+    }
+    
+    .resultados-text {
+        min-width: unset;
+        width: 100%;
+    }
+    
+    .resultados-stats {
+        gap: 15px;
+    }
+    
+    .resultados-stat {
+        min-width: 100px;
+    }
 }
 
 /* Requisitos Section */
