@@ -498,7 +498,7 @@
                                     <div class="servico-adicional-item">
                                         <div class="input-with-button">
                                             <input type="text" name="servicos-adicionais[]"
-                                                placeholder="Digite um serviço adicional">
+                                                placeholder="Digite um serviço">
                                             <button type="button" class="btn-icon btn-add-servico"><i
                                                     class="fas fa-plus"></i></button>
                                         </div>
@@ -925,7 +925,7 @@
             submitButton.disabled = true;
 
             // Enviar dados para o servidor
-            fetch('http://localhost:3000/oficinas', {
+            fetch('https://adm.vcarclube.com.br/api/CredenciadoPreCadastro/salvar', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
