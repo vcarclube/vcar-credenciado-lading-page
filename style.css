@@ -3459,13 +3459,13 @@ svg {
 /* Desktop Large (1441px - 1920px) */
 @media (min-width: 1441px) and (max-width: 1920px) {
     .hero-content {
-        margin-top: 0px !important;
+        margin-top: 200px !important;
     }
 }
 
 /* Desktop Extra Large (1921px+) */
 @media (min-width: 1921px) {
     .hero-content {
-        margin-top: 0px !important;
+        margin-top: 200px !important;
     }
 }
