@@ -3438,7 +3438,7 @@ svg {
 /* Tablet Landscape (769px - 1024px) */
 @media (min-width: 769px) and (max-width: 1024px) {
     .hero-content {
-        margin-top: 140px !important;
+        margin-top: 240px !important;
     }
 }
 
