@@ -917,7 +917,14 @@
             submitButton.disabled = true;
 
             formObject.servicosPrestados = formObject.servicosPrestados?.join(",");
-            formObject.quadroColaboradores = formObject.quadroColaboradores?.join(",");
+
+            const isArray = (value) => {
+                return Object.prototype.toString.call(value) === '[object Array]';
+            }
+
+            if(isArray(formObject.quadroColaboradores)){
+                formObject.quadroColaboradores = formObject.quadroColaboradores?.join(",");
+            }
 
             let json = JSON.stringify(formObject);
 
