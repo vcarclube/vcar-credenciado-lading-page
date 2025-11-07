@@ -260,7 +260,7 @@
             <nav>
                 <ul class="nav-links"></ul>
                 <div class="header-buttons">
-                    <a href="index.html" class="btn-primary"
+                    <a href="https://www.vcarclube.com.br/" class="btn-primary"
                         style="display: flex; align-items: center; justify-content: center;">
                         <div><i class="fa-solid fa-arrow-left"></i></div>&nbsp;&nbsp;&nbsp;
                         <div><span>voltar</span></div>
@@ -489,13 +489,50 @@
                                 <div id="servicos-adicionais-container">
                                     <div class="servico-adicional-item">
                                         <div class="input-with-button">
-                                            <input type="text" name="servicosPrestados[]"
-                                                placeholder="Digite um serviço">
+                                            <input type="text" name="servicosPrestados[]" list="servicos-list"
+                                                placeholder="Selecione um serviço">
                                             <button type="button" class="btn-icon btn-add-servico"><i
                                                     class="fas fa-plus"></i></button>
                                         </div>
                                     </div>
                                 </div>
+                                <!-- Lista de serviços para seleção (search select nativo) -->
+                                <datalist id="servicos-list">
+                                    <option value="Mecânica em geral"></option>
+                                    <option value="Troca de óleo"></option>
+                                    <option value="Suspensão"></option>
+                                    <option value="Freios"></option>
+                                    <option value="Embreagem"></option>
+                                    <option value="Motor"></option>
+                                    <option value="Direção"></option>
+                                    <option value="Alinhamento e balanceamento"></option>
+                                    <option value="Injeção eletrônica"></option>
+                                    <option value="Diagnóstico eletrônico"></option>
+                                    <option value="Ar-condicionado automotivo"></option>
+                                    <option value="Elétrica automotiva"></option>
+                                    <option value="Pneus"></option>
+                                    <option value="Radiador e arrefecimento"></option>
+                                    <option value="Escapamento"></option>
+                                    <option value="Troca de correia dentada"></option>
+                                    <option value="Revisão completa"></option>
+                                    <option value="Inspeção veicular"></option>
+                                    <option value="Pintura"></option>
+                                    <option value="Funilaria"></option>
+                                    <option value="Lanternagem"></option>
+                                    <option value="Martelinho de ouro"></option>
+                                    <option value="Polimento"></option>
+                                    <option value="Higienização interna"></option>
+                                    <option value="Lavagem"></option>
+                                    <option value="Detailing"></option>
+                                    <option value="Instalação de acessórios"></option>
+                                    <option value="Som automotivo"></option>
+                                    <option value="Rastreador/alarme"></option>
+                                    <option value="Vidros e para-brisa"></option>
+                                    <option value="Chaveiro automotivo"></option>
+                                    <option value="Guincho"></option>
+                                    <option value="Reboque"></option>
+                                    <option value="Vistoria pré-compra"></option>
+                                </datalist>
                             </div>
 
                             <div class="form-navigation">
@@ -543,7 +580,7 @@
                 </div>
                 <h3>Cadastro Enviado com Sucesso!</h3>
                 <p>Seu cadastro foi enviado para o grupo VCar Clube. Te daremos um retorno em breve.</p>
-                <a href="index.html" class="btn-home">
+                <a href="https://www.vcarclube.com.br/" class="btn-home">
                     <i class="fas fa-home"></i> Voltar para a Página Inicial
                 </a>
             </div>
@@ -587,6 +624,29 @@
             if (e.target.classList.contains('btn-add-servico') ||
                 e.target.parentElement.classList.contains('btn-add-servico')) {
                 addServicoField();
+            }
+        });
+
+        // Atalho: pressionar Enter dentro do campo de serviço adiciona um novo campo
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter') {
+                const target = e.target;
+                if (target && target.tagName === 'INPUT' && target.name === 'servicosPrestados[]') {
+                    // Evita submit do formulário ao pressionar Enter
+                    e.preventDefault();
+                    // Apenas adiciona se houver algum valor digitado/selecionado
+                    if (target.value && target.value.trim().length > 0) {
+                        addServicoField();
+                        // Foca no novo campo adicionado
+                        const container = document.getElementById('servicos-adicionais-container');
+                        const items = container.querySelectorAll('.servico-adicional-item');
+                        const lastItem = items[items.length - 1];
+                        const newInput = lastItem ? lastItem.querySelector('input[name="servicosPrestados[]"]') : null;
+                        if (newInput) {
+                            newInput.focus();
+                        }
+                    }
+                }
             }
         });
 
@@ -709,7 +769,7 @@
             newItem.className = 'servico-adicional-item';
             newItem.innerHTML = `
                     <div class="input-with-button">
-                        <input type="text" name="servicosPrestados[]" placeholder="Digite um serviço adicional">
+                        <input type="text" name="servicosPrestados[]" list="servicos-list" placeholder="Selecione um serviço adicional">
                         <button type="button" class="btn-icon btn-add-servico"><i class="fas fa-plus"></i></button>
                     </div>
                 `;
