@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <link rel="icon" type="image/png" href="logo-black.png">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y4485LZ6H0"></script>
@@ -378,17 +377,7 @@
 </head>
 
 <body>
-    <!-- Preloader -->
-    <div class="preloader">
-        <div class="loader">
-            <svg viewBox="0 0 80 80">
-                <circle id="loader-circle" cx="40" cy="40" r="32"></circle>
-            </svg>
-            <div class="car-icon">
-                <img src="logo-black.png" />
-            </div>
-        </div>
-    </div>
+    
 
     <!-- Header -->
     <header id="header2" style="background-color: #fff;">
@@ -551,13 +540,10 @@
     </section>
 
     <!-- Scripts -->
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
         const API_BASE = 'https://adm.vcarclube.com.br/';
 
         document.addEventListener('DOMContentLoaded', function () {
-            // Inicialização do AOS
-            AOS.init();
 
             // Obter token da URL
             const urlParams = new URLSearchParams(window.location.search);
@@ -590,16 +576,6 @@
                 submitDocumentationInParts(token);
             });
 
-            // Remover preloader quando a página estiver carregada
-            window.addEventListener('load', function () {
-                const preloader = document.querySelector('.preloader');
-                setTimeout(() => {
-                    preloader.style.opacity = '0';
-                    setTimeout(() => {
-                        preloader.style.display = 'none';
-                    }, 500);
-                }, 1000);
-            });
         });
 
         // Verificar status da documentação
