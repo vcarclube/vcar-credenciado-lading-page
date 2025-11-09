@@ -834,22 +834,17 @@
 
             // Para cada arquivo
             Array.from(files).forEach(file => {
-                // Verificar tamanho do arquivo (10MB)
-                if (file.size > 10485760) {
-                    alert(`O arquivo "${file.name}" excede o tamanho máximo permitido (10MB). Por favor, reduza o tamanho do arquivo.`);
-                    return;
-                }
-
                 // Verificar tipo de arquivo
                 if (file.type.startsWith('image/')) {
-                    // Imagem - comprimir antes de exibir preview
-                    compressImage(file, 1200, 0.7, (compressedFile, compressedDataUrl) => {
+                    // Imagem - compressão agressiva para upload, mantendo preview funcional
+                    const { maxWidth, quality } = getCompressionSettings(file.size);
+                    compressImage(file, maxWidth, quality, (compressedFile, compressedDataUrl) => {
                         if (type.startsWith('rep-preview-')) {
                             addImagePreview(type, compressedDataUrl, file.name, true, compressedFile);
                         } else {
                             addImagePreview(type, compressedDataUrl, file.name, true, compressedFile);
                         }
-                    });
+                    }, 'image/jpeg');
                 } else if (file.type === 'application/pdf') {
                     // PDF
                     if (type.startsWith('rep-preview-')) {
@@ -864,7 +859,20 @@
             });
         }
 
-        function compressImage(file, maxWidth, quality, callback) {
+        // Definir compressão dinâmica baseada no tamanho do arquivo
+        function getCompressionSettings(size) {
+            // Ultra compressão: quanto maior o arquivo, menor qualidade e largura
+            if (size >= 200 * 1024 * 1024) { // >= 200MB
+                return { maxWidth: 1280, quality: 0.35 };
+            } else if (size >= 100 * 1024 * 1024) { // 100MB - 199MB
+                return { maxWidth: 1600, quality: 0.4 };
+            } else if (size >= 50 * 1024 * 1024) { // 50MB - 99MB
+                return { maxWidth: 1800, quality: 0.5 };
+            }
+            return { maxWidth: 2000, quality: 0.6 };
+        }
+
+        function compressImage(file, maxWidth, quality, callback, outputType = 'image/jpeg') {
             const reader = new FileReader();
             reader.onload = function (e) {
                 const img = new Image();
@@ -889,8 +897,8 @@
                     canvas.toBlob(
                         (blob) => {
                             // Criar um novo arquivo a partir do blob
-                            const compressedFile = new File([blob], file.name, {
-                                type: file.type,
+                            const compressedFile = new File([blob], changeExtToJpg(file.name), {
+                                type: outputType,
                                 lastModified: file.lastModified
                             });
 
@@ -901,13 +909,19 @@
                             };
                             reader.readAsDataURL(blob);
                         },
-                        file.type,
+                        outputType,
                         quality
                     );
                 };
                 img.src = e.target.result;
             };
             reader.readAsDataURL(file);
+        }
+
+        function changeExtToJpg(name) {
+            const idx = name.lastIndexOf('.');
+            if (idx === -1) return name + '.jpg';
+            return name.substring(0, idx) + '.jpg';
         }
 
         // Adicionar preview de imagem
