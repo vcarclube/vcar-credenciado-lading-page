@@ -674,13 +674,16 @@
                                 });
 
                                 // Atualizar status geral dos representantes
-                                const algumReprovado = representantes.some(rep => rep.Reprovado == true);
-                                const algumAprovado = representantes.some(rep => rep.Reprovado == true);
-                                const algumNulo = representantes.some(rep => rep.Reprovado == null);
+                                const algumReprovado = representantes.some(rep => rep.reprovado === true || rep.Reprovado === true);
+                                const algumAprovado = representantes.some(rep => rep.aprovado === true || rep.Aprovado === true);
+                                const algumNulo = representantes.some(rep =>
+                                    (rep.reprovado === null || rep.Reprovado === null || rep.aprovado === null || rep.Aprovado === null) ||
+                                    (rep.reprovado === undefined && rep.Reprovado === undefined && rep.aprovado === undefined && rep.Aprovado === undefined)
+                                );
 
                                 console.log(algumReprovado, algumAprovado, algumNulo)
 
-                                let valid = (algumNulo) ? null : algumReprovado ? false : algumAprovado ? true : false;
+                                let valid = algumReprovado ? false : algumAprovado ? true : null;
 
                                 updateStatusBadge('representantes', valid);
                             }
