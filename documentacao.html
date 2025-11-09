@@ -703,13 +703,22 @@
                         data.contratoSocialOk === true &&
                         data.documentoRepresentantesOk === true;
 
-                    // Verificar se algum documento foi reprovado
+                    // Considerar rejeição apenas quando há documento enviado
+                    const hasLogotipo = !!data.logotipo;
+                    const hasFotos = Array.isArray(data.fotosEstabelecimento)
+                        ? data.fotosEstabelecimento.length > 0
+                        : (typeof data.fotosEstabelecimento === 'string' && data.fotosEstabelecimento.trim() !== '');
+                    const hasComprovante = !!data.comprovanteResidencia;
+                    const hasContrato = !!data.contratoSocial;
+                    const hasRepresentantes = !!data.documentoRepresentantes && data.documentoRepresentantes !== "";
+
+                    // Verificar se algum documento foi reprovado (apenas se enviado)
                     const someRejected =
-                        data.logotipoOk === false ||
-                        data.fotosEstabelecimentoOk === false ||
-                        data.comprovanteResidenciaOk === false ||
-                        data.contratoSocialOk === false ||
-                        data.documentoRepresentantesOk === false;
+                        (hasLogotipo && data.logotipoOk === false) ||
+                        (hasFotos && data.fotosEstabelecimentoOk === false) ||
+                        (hasComprovante && data.comprovanteResidenciaOk === false) ||
+                        (hasContrato && data.contratoSocialOk === false) ||
+                        (hasRepresentantes && data.documentoRepresentantesOk === false);
 
                     // Mostrar mensagem apropriada
                     if (allApproved) {
