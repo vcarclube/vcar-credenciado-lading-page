@@ -710,7 +710,23 @@
                         : (typeof data.fotosEstabelecimento === 'string' && data.fotosEstabelecimento.trim() !== '');
                     const hasComprovante = !!data.comprovanteResidencia;
                     const hasContrato = !!data.contratoSocial;
-                    const hasRepresentantes = !!data.documentoRepresentantes && data.documentoRepresentantes !== "";
+                    let hasRepresentantes = false;
+                    if (Array.isArray(data.documentoRepresentantes)) {
+                        hasRepresentantes = data.documentoRepresentantes.length > 0;
+                    } else if (typeof data.documentoRepresentantes === 'string') {
+                        const trimmed = data.documentoRepresentantes.trim();
+                        if (trimmed === '' || trimmed === '[]') {
+                            hasRepresentantes = false;
+                        } else {
+                            try {
+                                const parsed = JSON.parse(trimmed);
+                                hasRepresentantes = Array.isArray(parsed) ? parsed.length > 0 : !!parsed;
+                            } catch (e) {
+                                // Se não for JSON válido, considerar como presente apenas se não for vazio
+                                hasRepresentantes = true;
+                            }
+                        }
+                    }
 
                     // Verificar se algum documento foi reprovado (apenas se enviado)
                     const someRejected =
